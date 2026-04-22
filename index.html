@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training Form — Train smarter. Understand why.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:         #0d0d0f;
+    --surface:    #111113;
+    --card:       #1a1a1e;
+    --border:     rgba(255,255,255,0.08);
+    --blue:       #60a5fa;
+    --blue-dim:   rgba(96,165,250,0.12);
+    --amber:      #f59e0b;
+    --amber-dim:  rgba(245,158,11,0.10);
+    --purple:     #818cf8;
+    --purple-dim: rgba(129,140,248,0.10);
+    --text:       #ffffff;
+    --text-2:     rgba(255,255,255,0.55);
+    --text-3:     rgba(255,255,255,0.30);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(13,13,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(96,165,250,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue-dim);
+    border: 1px solid rgba(96,165,250,0.2);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    max-width: 800px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--blue);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-2);
+    max-width: 480px;
+    margin-top: 24px;
+    line-height: 1.65;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: #000;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: var(--card);
+    color: var(--text);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-1px); }
+
+  /* METRICS PREVIEW */
+  .metrics-preview {
+    display: flex;
+    gap: 12px;
+    margin-top: 72px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .metric-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .metric-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .metric-pill-label { font-size: 12px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.6px; }
+  .metric-pill-value { font-size: 18px; font-weight: 600; line-height: 1; }
+
+  /* FEATURES */
+  .section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 100px 24px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    max-width: 560px;
+  }
+
+  .section-title em { font-style: italic; color: var(--blue); }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--text-2);
+    max-width: 480px;
+    margin-top: 16px;
+    line-height: 1.65;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 56px;
+  }
+
+  .feature-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: border-color 0.2s;
+  }
+
+  .feature-card:hover { border-color: rgba(255,255,255,0.15); }
+
+  .feature-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .feature-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  /* GUIDANCE EXAMPLE */
+  .guidance-block {
+    background: var(--card);
+    border: 1px solid rgba(129,140,248,0.25);
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 56px;
+  }
+
+  .guidance-tag {
+    display: inline-block;
+    background: var(--purple-dim);
+    color: var(--purple);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+  }
+
+  .guidance-block p {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+
+  .guidance-block strong { color: var(--text); }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 24px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .footer-tagline {
+    font-size: 13px;
+    color: var(--text-3);
+    margin-bottom: 24px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-3);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 20px; }
+    .section { padding: 64px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Training Form</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span>●</span> Coming to the App Store
+  </div>
+  <h1>Train smarter.<br><em>Understand why.</em></h1>
+  <p class="hero-sub">Training Form connects to your data and tells you if you're training smart right now — and explains exactly why, using your own numbers.</p>
+  <div class="hero-cta">
+    <a href="support.html" class="btn-ghost">Get Support</a>
+    <a href="privacy.html" class="btn-ghost">Privacy Policy</a>
+  </div>
+  <div class="metrics-preview">
+    <div class="metric-pill">
+      <div class="metric-dot" style="background:#60a5fa"></div>
+      <div>
+        <div class="metric-pill-label">Fitness · CTL</div>
+        <div class="metric-pill-value" style="color:#60a5fa">74</div>
+      </div>
+    </div>
+    <div class="metric-pill">
+      <div class="metric-dot" style="background:#f59e0b"></div>
+      <div>
+        <div class="metric-pill-label">Fatigue · ATL</div>
+        <div class="metric-pill-value" style="color:#f59e0b">62</div>
+      </div>
+    </div>
+    <div class="metric-pill">
+      <div class="metric-dot" style="background:#34d399"></div>
+      <div>
+        <div class="metric-pill-label">Form · TSB</div>
+        <div class="metric-pill-value" style="color:#34d399">+12</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section">
+  <div class="section-label">What it does</div>
+  <h2 class="section-title">Not a dashboard.<br><em>A coaching recommendation.</em></h2>
+  <p class="section-sub">Most training tools show you data. Training Form tells you what to do with it — and explains the science behind every recommendation.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(96,165,250,0.12)">📊</div>
+      <h3>Form Guidance</h3>
+      <p>A specific, empirically grounded coaching recommendation every day — calibrated to your race, your aggression level, and your actual numbers.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(129,140,248,0.12)">🎓</div>
+      <h3>Education built in</h3>
+      <p>Every metric has an inline explainer. After six weeks of use, you understand training adaptation — because the app showed you with your own data.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(245,158,11,0.12)">🏁</div>
+      <h3>Race-day aware</h3>
+      <p>Taper guidance, phase detection, and TSB targeting built in. Training Form knows what phase you're in and coaches accordingly.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:rgba(52,211,153,0.12)">🔗</div>
+      <h3>Multi-source</h3>
+      <p>Connects to Strava and Apple Health. One unified form score calculated from your raw activity streams — never from pre-calculated values.</p>
+    </div>
+  </div>
+
+  <div class="guidance-block">
+    <div class="guidance-tag">Form Guidance · Example</div>
+    <p><strong>Your ATL has risen 21 points in 8 days while CTL moved only 3.</strong> You are accumulating fatigue 7× faster than fitness. A recovery day now protects the gains you have built — pushing through this hole deepens it. Based on power data from your last 4 sessions — high confidence.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" style="text-align:center; padding-top: 80px; padding-bottom: 80px;">
+  <div class="section-label">Privacy</div>
+  <h2 class="section-title" style="margin: 0 auto;">Your data stays yours.</h2>
+  <p class="section-sub" style="margin: 16px auto 0;">Training Form never sells your data, never shares it with advertisers, and never uses it for any purpose other than coaching you. Health and activity data is private by design.</p>
+  <a href="privacy.html" class="btn-ghost" style="display:inline-block; margin-top: 32px;">Read the privacy policy →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">Training Form</div>
+  <div class="footer-tagline">Train smarter. Understand why.</div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+    <li><a href="support.html">Support</a></li>
+    <li><a href="mailto:support@trainingform.app">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Training Form. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

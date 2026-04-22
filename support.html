@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — Training Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #0d0d0f;
+    --surface:  #111113;
+    --card:     #1a1a1e;
+    --border:   rgba(255,255,255,0.08);
+    --blue:     #60a5fa;
+    --blue-dim: rgba(96,165,250,0.12);
+    --text:     #ffffff;
+    --text-2:   rgba(255,255,255,0.55);
+    --text-3:   rgba(255,255,255,0.30);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(13,13,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .page-header {
+    padding: 140px 24px 64px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .page-header .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+
+  .page-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 16px;
+  }
+
+  .page-header p {
+    font-size: 16px;
+    color: var(--text-2);
+    max-width: 480px;
+  }
+
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 100px;
+  }
+
+  /* CONTACT CARD */
+  .contact-card {
+    background: var(--card);
+    border: 1px solid rgba(96,165,250,0.2);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+  }
+
+  .contact-card-left h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  .contact-card-left p {
+    font-size: 14px;
+    color: var(--text-2);
+  }
+
+  .contact-btn {
+    background: var(--blue);
+    color: #000;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+
+  .contact-btn:hover { opacity: 0.9; }
+
+  /* FAQ */
+  .faq-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 24px;
+  }
+
+  .faq-item {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+  }
+
+  .faq-item:last-child { border-bottom: 1px solid var(--border); }
+
+  .faq-q {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .faq-a {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+
+  .faq-a a { color: var(--blue); text-decoration: none; }
+  .faq-a a:hover { text-decoration: underline; }
+
+  /* METRICS */
+  .metrics-section {
+    margin-top: 64px;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .metric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .metric-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .metric-def {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.55;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    list-style: none;
+    margin: 16px 0 24px;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+  .footer-copy { font-size: 12px; color: var(--text-3); }
+
+  @media (max-width: 640px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 20px; }
+    .contact-card { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Training Form</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="support.html">Support</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="label">Help</div>
+  <h1>Support</h1>
+  <p>Questions about Training Form, your data, or how it works? We're here.</p>
+</div>
+
+<div class="content">
+
+  <div class="contact-card">
+    <div class="contact-card-left">
+      <h2>Get in touch</h2>
+      <p>We respond to all support requests within 48 hours.</p>
+    </div>
+    <a href="mailto:support@trainingform.app" class="contact-btn">Email support →</a>
+  </div>
+
+  <div class="faq-label">Frequently asked questions</div>
+
+  <div class="faq-item">
+    <div class="faq-q">What is Training Form and what does it do?</div>
+    <div class="faq-a">Training Form is an iOS coaching app that connects to your training data (Strava, Apple Health) and tells you whether you're training smart right now — and explains exactly why, using your own numbers. The primary output is a coaching recommendation called Form Guidance, not a data dashboard.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How do I connect my data?</div>
+    <div class="faq-a">During onboarding, you can connect Strava or Apple Health. You can also manage connections at any time from Settings → Manage Connections. At least one data source must be connected for Training Form to calculate your training load.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Why is my dashboard showing zeroes or no data?</div>
+    <div class="faq-a">This usually means a sync hasn't completed yet. Go to Settings → Sync Now and wait for the sync to finish. If you've just connected a data source for the first time, the first sync may take a minute or two as it imports your full history.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What is TSB and why does it matter?</div>
+    <div class="faq-a">TSB (Training Stress Balance) is your Form score — the difference between your long-term fitness (CTL) and your short-term fatigue (ATL). A positive TSB means you're fresh. A negative TSB means you're carrying fatigue. Racing is typically best between 0 and +15. Training Form teaches you this model through your own data over time.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How does Training Form calculate TSB differently from other apps?</div>
+    <div class="faq-a">Training Form calculates everything from your raw activity streams — power, heart rate, and pace data — rather than consuming pre-calculated values from Strava or other sources. This means the calculations are consistent across all your data sources and entirely owned by the app.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What does the confidence tier mean?</div>
+    <div class="faq-a">The confidence tier tells you how your Training Stress Score (TSS) was calculated for a given activity. Power data is the most accurate (Tier 1), followed by heart rate (Tier 2), pace (Tier 3), and estimated (Tier 4). Form Guidance always tells you which tier your recommendation is based on.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How do I delete my account and data?</div>
+    <div class="faq-a">Tap the Profile pill in the top right of the dashboard → Delete Account. This permanently removes all your data from our systems immediately. You can also request deletion by emailing <a href="mailto:support@trainingform.app">support@trainingform.app</a>.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Is my health data private?</div>
+    <div class="faq-a">Yes. Training Form never sells your data, never shares it with advertisers, and never uses it for any purpose other than coaching you. HealthKit data is specifically never shared with third parties and never used for advertising. See our <a href="privacy.html">Privacy Policy</a> for full details.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Why do I need to enter my date of birth?</div>
+    <div class="faq-a">Your date of birth is used to estimate your Lactate Threshold Heart Rate (LTHR) and maximum heart rate, which are used to calculate heart rate-based training load. You can enter this in Settings or when prompted during onboarding. It's optional but improves the accuracy of your coaching guidance significantly.</div>
+  </div>
+
+  <div class="metrics-section">
+    <div class="faq-label">Metric reference</div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-name" style="color:#34d399">TSB · Form</div>
+        <div class="metric-def">How fresh you are right now. Positive = fresh, negative = tired. Racing is best between 0 and +15.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name" style="color:#60a5fa">CTL · Fitness</div>
+        <div class="metric-def">How fit you are. Built slowly over 6 weeks of consistent training. A high CTL means a big engine.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name" style="color:#f59e0b">ATL · Fatigue</div>
+        <div class="metric-def">How tired your body is from recent training. Rises fast with hard days, drops fast with rest.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">TSS</div>
+        <div class="metric-def">A single number scoring how hard a workout was. 100 TSS is roughly one hour at threshold effort.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">FTP</div>
+        <div class="metric-def">The maximum power you can sustain for about an hour. The anchor for all cycling load calculations.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">LTHR</div>
+        <div class="metric-def">The heart rate at which your body starts working anaerobically. Used for HR-based TSS calculation.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">Training Form</div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+    <li><a href="support.html">Support</a></li>
+    <li><a href="mailto:support@trainingform.app">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Training Form. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
